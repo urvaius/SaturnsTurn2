@@ -81,11 +81,19 @@ namespace SaturnsTurn2
             shieldActive = false;
         }
 
+       // private float RotationAngle;
         public void Update(GameTime gameTime)
         {
             PlayerAnimation.Position = Position3;
             PlayerAnimation.Update(gameTime);
-            
+            //ship move with arrows
+            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            // TODO: Add your game logic here.
+           // RotationAngle += elapsed;
+           // float circle = MathHelper.Pi * 2;
+           // RotationAngle = RotationAngle % circle;
+
 
         }
         public void Draw(SpriteBatch spriteBatch)

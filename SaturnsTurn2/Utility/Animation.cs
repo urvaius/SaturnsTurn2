@@ -12,6 +12,9 @@ namespace SaturnsTurn2.Utility
         // The image representing the collection of images used for animation
         Texture2D spriteStrip;
 
+       //make ship circle
+       
+
 
         // The scale used to display the sprite strip
         public float scale { get; set; }
