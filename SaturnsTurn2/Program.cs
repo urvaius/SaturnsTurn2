@@ -12,7 +12,7 @@ namespace SaturnsTurn2
         /// </summary>
         static void Main()
         {
-            var factory = new MonoGame.Framework.GameFrameworkViewSource<Game1>();
+            var factory = new MonoGame.Framework.GameFrameworkViewSource<SaturnsTurn2Game>();
             Windows.ApplicationModel.Core.CoreApplication.Run(factory);
         }
     }
