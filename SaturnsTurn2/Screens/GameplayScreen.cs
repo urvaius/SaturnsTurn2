@@ -63,16 +63,13 @@ namespace GameStateManagement
         Texture2D balloonEnemyTexture;
         //Texture2D asteroidTexture;
         Texture2D asteroidTexture2;
-        //List<FireHair> fireHairEnemies;
+        
 
         List<AsteroidEnemy2> asteroids2;
-        //List<AsteroidEnemy> asteroids;
-       // List<Enemy> enemies;
-        //List<GreenMineEnemy> balloonEnemies;
+        
         Texture2D projectileTexture;
         List<Projectile> projectiles;
-        //TimeSpan fireTime;
-        //TimeSpan previousFireTime;
+        
         //the rate for enemies to appear
         TimeSpan enemySpawnTime;
         TimeSpan balloonEnemySpawnTime;
@@ -98,11 +95,7 @@ namespace GameStateManagement
 
         MouseState currentMouseState;
         MouseState previousMouseState;
-       // Random randomAsteroid;
-       // Random randomPowerUp;
-        //Random ranp;
-       // Random randomEnemy;
-       // Random randomFireHair;
+      
 
 
         Random random = new Random();
@@ -166,11 +159,10 @@ namespace GameStateManagement
 
 
             //load enemies textures
-           // fireHairTexture = content.Load<Texture2D>(@"graphics\FireHair");
+           
             asteroidTexture2 = content.Load<Texture2D>(@"Graphics\asteroid01");
             //asteroidTexture = content.Load<Texture2D>(@"Graphics\asteroid01");
-            //enemyTexture = content.Load<Texture2D>(@"Graphics\mineAnimation");
-            //balloonEnemyTexture = content.Load<Texture2D>(@"Graphics\mineGreenAnimation");
+            
            // powerupDamageTexture = content.Load<Texture2D>(@"Graphics\powerup");
             //powerupShieldTexture = content.Load<Texture2D>(@"Graphics\shieldpowerup");
             mainBackground = content.Load<Texture2D>(@"Graphics\mainbackground");
@@ -193,11 +185,7 @@ namespace GameStateManagement
             explosions = new List<Animation>();
             explosion1Texture = content.Load<Texture2D>(@"Graphics\explosion");
 
-            //initialize fire Hair
-           // fireHairEnemies = new List<FireHair>();
-           // previousFireHairSpawnTime = TimeSpan.Zero;
-           // fireHairSpawnTime = TimeSpan.FromSeconds(8f);
-            //randomFireHair = new Random();
+           
 
 
             //initialize asteroid
@@ -210,15 +198,12 @@ namespace GameStateManagement
 
             //initialize enemies list etc..
 
-           // enemies = new List<Enemy>();
-            //seperate enemies to balloon to add other ones.
-           // balloonEnemies = new List<GreenMineEnemy>();
+           ;
             //set enemy spawn time keepers to zero
            // previousSpawnTime = TimeSpan.Zero;
-           // previousBalloonSpawnTime = TimeSpan.Zero;
+           
             //used to determine how fast enemy respawns
-           // enemySpawnTime = TimeSpan.FromSeconds(2.0f);
-           // balloonEnemySpawnTime = TimeSpan.FromSeconds(5.0f);
+           
            // powerUpSpawnTime = TimeSpan.FromSeconds(10.0f);
            // previousPowerUpSpawnTime = TimeSpan.Zero;
             previousDeathTime = TimeSpan.Zero;
@@ -388,6 +373,7 @@ namespace GameStateManagement
             }
             else
             {
+                // not sure if need this use player.position3
                 Vector2 movement = Vector2.Zero;
                 //windows 8 gestures monogame
                 while (TouchPanel.IsGestureAvailable)
@@ -422,6 +408,7 @@ namespace GameStateManagement
                 }
                 if (keyboardState.IsKeyDown(Keys.A) || keyboardState.IsKeyDown(Keys.Left))
                 {
+                   // player.Position3.X--;
                     movement.X--;
                     //add for scroll background
                     newBackground.BackgroundOffset -= 1;
@@ -432,6 +419,7 @@ namespace GameStateManagement
 
                 if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
                 {
+                   // player.Position3.X++;
                     movement.X++;
                     //add for scroll backgorund
                     newBackground.BackgroundOffset += 1;
@@ -440,13 +428,16 @@ namespace GameStateManagement
 
 
                 if (keyboardState.IsKeyDown(Keys.W) || keyboardState.IsKeyDown(Keys.Up))
+                   // player.Position3.Y--;//
                     movement.Y--;
 
                 if (keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Down))
+                   // player.Position3.Y++;//
                     movement.Y++;
 
                 Vector2 thumbstick = gamePadState.ThumbSticks.Left;
-
+               // player.Position3.X += thumbstick.X;
+               // player.Position3.X += thumbstick.Y;
                 movement.X += thumbstick.X;
                 movement.Y -= thumbstick.Y;
                 // Make sure that the player does not go out of bounds
@@ -596,13 +587,12 @@ namespace GameStateManagement
         {
             //use the rectangles built in intersect funtion to determine if two objects are overlapping
             Rectangle playerRectangle;
-           // Rectangle balloonEnemyRectangle2;
-          //  Rectangle enemyRectangle2;
+          
             Rectangle projectileRectangle;
           //  Rectangle damagePowerUpRectangle;
             Rectangle asteroidRectangle;
            // Rectangle shieldPowerUpRectangle;
-           // Rectangle fireHairRectangle;
+           
             //only create the rectangle once for the player
             playerRectangle = new Rectangle((int)player.Position3.X, (int)player.Position3.Y, player.Width, player.Height);
 
@@ -660,24 +650,7 @@ namespace GameStateManagement
 
                 //}
 
-            //todo firehair collision
-            //for (int i = 0; i < fireHairEnemies.Count; i++)
-            //{
-            //    fireHairRectangle = new Rectangle((int)fireHairEnemies[i].Position.X, (int)fireHairEnemies[i].Position.Y, fireHairEnemies[i].Width, fireHairEnemies[i].Height);
-            //    if (playerRectangle.Intersects(fireHairRectangle))
-            //    {
-            //        if (player.Shield > 0)
-            //        {
-            //            player.Shield -= fireHairEnemies[i].Damage;
-            //            fireHairEnemies[i].Health -= player.Damage;
-            //        }
-            //        else
-            //        {
-            //            player.Health -= fireHairEnemies[i].Damage;
-            //            fireHairEnemies[i].Health -= player.Damage;
-            //        }
-            //    }
-            //    }
+           
             //asteroid to player collision
             for (int i = 0; i < asteroids2.Count; i++)
             {
@@ -705,57 +678,11 @@ namespace GameStateManagement
             }
 
             
-            //todo collision with balloonenemy and player
-            //for (int i = 0; i < balloonEnemies.Count; i++)
-            //{
-            //    balloonEnemyRectangle2 = new Rectangle((int)balloonEnemies[i].Position.X, (int)balloonEnemies[i].Position.Y, balloonEnemies[i].Width, balloonEnemies[i].Height);
-            //    if (playerRectangle.Intersects(balloonEnemyRectangle2))
-            //    {
-
-            //        if (player.Shield > 0)
-            //        {
-            //            player.Shield -= balloonEnemies[i].Damage;
-            //            balloonEnemies[i].Health -= player.Damage;
-            //        }
-            //        else
-            //        {
-            //            player.Health -= balloonEnemies[i].Damage;
-            //            balloonEnemies[i].Health -= player.Damage;
-            //        }
-
-
-
-            //    }
-            //}
-            //do the collision between the player and the enemies
-            //for (int i = 0; i < enemies.Count; i++)
-            //{
-
-            //    enemyRectangle2 = new Rectangle((int)enemies[i].Position.X, (int)enemies[i].Position.Y, enemies[i].Width, enemies[i].Height);
-            //    //determine if the thwo objects collided with each other
-            //    if (playerRectangle.Intersects(enemyRectangle2))
-            //    {
-            //        if (player.Shield > 0)
-            //        {
-            //            player.Shield -= enemies[i].Damage;
-            //            enemies[i].Health -= player.Damage;
-            //        }
-
-            //        else
-            //        {
-            //            player.Health -= enemies[i].Damage;
-
-            //            enemies[i].Health -= player.Damage;
-            //        }
-
-
-
-            //    }
-            //}
+            
 
 
             #region projectile vs enemies collision
-            //todo add fire hair enemy collisio vs projectile
+            
 
 
             //projectile vs enemies collision
@@ -765,19 +692,7 @@ namespace GameStateManagement
                 //see if this works here
                 projectileRectangle = new Rectangle((int)projectiles[i].Position.X - projectiles[i].Width , (int)projectiles[i].Position.Y - projectiles[i].Height , projectiles[i].Width, projectiles[i].Height);
 
-                //for (int j = 0; j < balloonEnemies.Count; j++)
-                //{
-                //    //create the rectangles we need to determine if we collided with each other
-
-                //    // projectileRectangle = new Rectangle((int)projectiles[i].Position.X - projectiles[i].Width / 2, (int)projectiles[i].Position.Y - projectiles[i].Height / 2, projectiles[i].Width, projectiles[i].Height);
-                //    balloonEnemyRectangle2 = new Rectangle((int)balloonEnemies[j].Position.X - balloonEnemies[j].Width / 2, (int)balloonEnemies[j].Position.Y - balloonEnemies[j].Height / 2, balloonEnemies[j].Width, balloonEnemies[j].Height);
-                //    //determine if the two objects collide with each other
-                //    if (projectileRectangle.Intersects(balloonEnemyRectangle2))
-                //    {
-                //        balloonEnemies[j].Health -= projectiles[i].Damage;
-                //        projectiles[i].Active = false;
-                //    }
-                //}
+                
                 //projectile vs asteroids
                 for (int k = 0; k < asteroids2.Count; k++)
                 {
@@ -870,27 +785,7 @@ namespace GameStateManagement
         //}
         private void UpdateEnemies(GameTime gameTime)
         {
-            //spawn a new enemy every 1.5 seconds
-            //if (gameTime.TotalGameTime - previousSpawnTime > enemySpawnTime)
-            //{
-            //    previousSpawnTime = gameTime.TotalGameTime;
-            //    //add the enemy
-            //    AddEnemy();
-
-            //}
-
-            //if(gameTime.TotalGameTime - previousFireHairSpawnTime >fireHairSpawnTime)
-            //{
-            //    previousFireHairSpawnTime = gameTime.TotalGameTime;
-            //    AddFireHair();
-            //}
-            ////spawn ballon enemies every 5 sec
-            //if (gameTime.TotalGameTime - previousBalloonSpawnTime > balloonEnemySpawnTime)
-            //{
-            //    previousBalloonSpawnTime = gameTime.TotalGameTime;
-            //    //add abllon enemies
-            //    AddBalloonEnemy();
-            //}
+           
 
             //spawn asteroids
             if (gameTime.TotalGameTime - previousAsteroidSpawnTime > asteroidSpawnTime)
@@ -917,56 +812,7 @@ namespace GameStateManagement
                 }
             }
 
-            ////update fire hair
-            //for (int i =fireHairEnemies.Count - 1; i>=0;i--)
-            //{
-            //    fireHairEnemies[i].Update(gameTime);
-            //    if (!fireHairEnemies[i].Active)
-            //    {
-            //        AddExplosion(fireHairEnemies[i].Position);
-            //        //AudioManager.PlaySound("explosionSound");
-            //        player.Score += fireHairEnemies[i].Value;
-                    
-            //        fireHairEnemies.RemoveAt(i);
-            //    }
-            //}
-            ////update balloon enemies
-            //for (int i = balloonEnemies.Count - 1; i >= 0; i--)
-            //{
-            //    balloonEnemies[i].Update(gameTime);
-            //    if (!balloonEnemies[i].Active)
-            //    {
-            //        AddExplosion(balloonEnemies[i].Position);
-            //        //AudioManager.PlaySound("explosionSound");
-            //        player.Score += balloonEnemies[i].Value;
-
-            //        balloonEnemies.RemoveAt(i);
-
-            //    }
-
-            //    else if (balloonEnemies[i].Active && !balloonEnemies[i].OnScreen)
-            //    {
-            //        balloonEnemies.RemoveAt(i);
-            //    }
-
-
-            //}
-            //update the enemies
-            //for (int i = enemies.Count - 1; i >= 0; i--)
-            //{
-            //    enemies[i].Update(gameTime);
-            //    if (!enemies[i].Active )
-            //    {
-            //        AddExplosion(enemies[i].Position);
-            //        //AudioManager.PlaySound("explosionSound");
-            //        player.Score += enemies[i].Value;
-            //        enemies.RemoveAt(i);
-            //    }
-            //    else if (enemies[i].Active && !enemies[i].OnScreen)
-            //    {
-            //        enemies.RemoveAt(i);
-            //    }
-            //}
+           
         }
 
 
